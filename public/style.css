@@ -1,0 +1,69 @@
+#container {
+    position: absolute;
+    top: calc(50vh - 12vw);
+    left: 38vw;
+    display: grid;
+    grid-template:
+    "  a    b    c"  8vw
+    "  d    e    f"  8vw
+    "  g    h    i"  8vw
+    /  8vw  8vw  8vw;
+}
+
+#comemorativo {
+    width: 100vw;
+}
+
+#texto {
+    font-size: 12vh;
+    text-align: center;
+    font-style: oblique;
+    font-weight: bold;
+    position: relative;
+    color: rgba(255, 217, 0, 0.932);
+}
+
+.casa {
+    background-image: none;
+    background-size: cover;
+}
+
+.casa:hover {
+    cursor: pointer;
+}
+
+.a { grid-area: 'a'; }
+
+.b { grid-area: 'b';
+    border-right: 3px solid black;
+    border-left: 3px solid black;
+}
+
+.c { grid-area: 'c'; }
+
+.d { 
+    grid-area: 'd';
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.e { 
+    grid-area: 'e';
+    border: 3px solid black;
+}
+
+.f { 
+    grid-area: 'f';
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.g { grid-area: 'g';}
+
+.h { 
+    grid-area: 'h';
+    border-right: 3px solid black;
+    border-left: 3px solid black;
+}
+
+.i { grid-area: 'i';}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost:3000/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+    <div class="casa a"></div>
+    <div class="casa b"></div>
+    <div class="casa c"></div>
+    <div class="casa d"></div>
+    <div class="casa e"></div>
+    <div class="casa f"></div>
+    <div class="casa g"></div>
+    <div class="casa h"></div>
+    <div class="casa i"></div>
+    </div>
+
+    <section id="comemorativo">
+        <p id="texto"></p>
+    </section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io()
+    
+    socket.on('connect', () => {
+        let playerId = socket.id
+        console.log(`>Player connected on Client with id: ${playerId}`)
+        
+        function sendA() {
+            const command = {
+                playerId: socket.id, letter: 'a'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendB() {
+            const command = {
+                playerId: socket.id, letter: 'b'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendC() {
+            const command = {
+                playerId: socket.id, letter: 'c'
+            }
+            socket.emit('HouseSelected', command)          
+        }
+
+        function sendD() {
+            const command = {
+                playerId: socket.id, letter: 'd'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendE() {
+            const command = {
+                playerId: socket.id, letter: 'e'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendF() {
+            const command = {
+                playerId: socket.id, letter: 'f'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendG() {
+            const command = {
+                playerId: socket.id, letter: 'g'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendH() {
+            const command = {
+                playerId: socket.id, letter: 'h'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+
+        function sendI() {
+            const command = {
+                playerId: socket.id, letter: 'i'
+            }
+            socket.emit('HouseSelected', command)  
+        }
+        casas = {
+        a : document.querySelector('.a'),
+        b : document.querySelector('.b'),
+        c : document.querySelector('.c'),
+        d : document.querySelector('.d'),
+        e : document.querySelector('.e'),
+        f : document.querySelector('.f'),
+        g : document.querySelector('.g'),
+        h : document.querySelector('.h'),
+        i : document.querySelector('.i')
+        }
+
+        casas.a.addEventListener('click', sendA)
+        casas.b.addEventListener('click', sendB)
+        casas.c.addEventListener('click', sendC)
+        casas.d.addEventListener('click', sendD)
+        casas.e.addEventListener('click', sendE)
+        casas.f.addEventListener('click', sendF)
+        casas.g.addEventListener('click', sendG)
+        casas.h.addEventListener('click', sendH)
+        casas.i.addEventListener('click', sendI)
+
+        socket.on('jogada', (res) => {
+            console.log('> Uma Jogada Acontenceu')
+            url = `http://localhost:3000/${res.face}.png`
+            console.log(res)
+            console.log(casas[res.letter])
+            casas[res.letter].style = `background-image: url(${url})`
+        })
+
+        socket.on('clean', () => {
+            casas.a.style = `background-image: none`
+            casas.b.style = `background-image: none`
+            casas.c.style = `background-image: none`
+            casas.d.style = `background-image: none`
+            casas.e.style = `background-image: none`
+            casas.f.style = `background-image: none`
+            casas.g.style = `background-image: none`
+            casas.h.style = `background-image: none`
+            casas.i.style = `background-image: none`   
+            document.getElementById('comemorativo').style = 'position: absolute'
+            document.getElementById('comemorativo').style = 'margin-top: 0'
+            document.getElementById('texto').textContent = ``         
+        })
+
+        socket.on('draw', () => {
+            console.log(`> Draw!`)
+            document.getElementById('comemorativo').style = 'position: absolute'
+            document.getElementById('comemorativo').style = 'margin-top: 46vh'
+            document.getElementById('texto').style = 'color: gray'
+            document.getElementById('texto').textContent = `EMPATE`.toUpperCase()
+        })
+
+        socket.on('winner', (winner) => {
+            console.log(`>${winner} wins`)
+            document.getElementById('comemorativo').style = 'position: absolute'
+            document.getElementById('comemorativo').style = 'margin-top: 46vh'
+            document.getElementById('texto').style = 'color: rgba(255, 217, 0, 0.932)'
+            document.getElementById('texto').textContent = `${winner} VENCEU!`.toUpperCase()
+                
+        })
+    })
+
+    
+
+</script>
+</body>
+</html>
